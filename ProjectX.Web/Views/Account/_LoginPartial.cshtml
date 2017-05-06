@@ -1,0 +1,32 @@
+﻿@model ProjectX.Web.Models.LoginModel
+
+@using (Html.BeginForm("JsonLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { id = "login_form" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <h1>Login Form</h1>
+    @Html.ValidationSummary()
+    <div>
+        @Html.TextBoxFor(m => m.UserName, new { autofocus = "autofocus", id = "username", name = "username", placeholder = "Username", @class = "form-control", required = "required" })
+    </div>
+    <div>
+        @Html.PasswordFor(m => m.Password, new { id = "password", name = "password", placeholder = "Password", @class = "form-control", required = "required" })
+    </div>
+    <div class="checkbox">@Html.CheckBoxFor(m => m.RememberMe) Remember me?</div>
+    <div>
+        <button class="btn btn-default submit" type="submit">Log in</button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="separator">
+        <p class="change_link">
+            New to site?
+            <a href="#signup" class="to_register"> Create Account </a>
+        </p>
+        <div class="clearfix"></div>
+        <br />
+        <div>
+            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+            <p>Copyright &copy; @DateTime.Now.Year - Powered by <a href="http://itechsoftwares.net" target="_blank">iTECH</a></p>
+        </div>
+    </div>
+}

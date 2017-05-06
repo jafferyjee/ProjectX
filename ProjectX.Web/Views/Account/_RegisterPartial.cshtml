@@ -1,0 +1,35 @@
+﻿@model ProjectX.Web.Models.RegisterModel
+
+@using (Html.BeginForm("JsonRegister", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { Id = "reg_form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <h1>Create Account</h1>
+    @Html.ValidationSummary()
+
+    <div>
+        @Html.TextBoxFor(m => m.UserName, new { id = "registerName", placeholder = "Username", @class = "form-control" })
+    </div>
+    <div>
+        @Html.PasswordFor(m => m.Password, new { id = "Password", placeholder = "Password", @class = "form-control" })
+    </div>
+    <div>
+        @Html.PasswordFor(m => m.ConfirmPassword, new { id = "ConfirmPassword", placeholder = "Confirm password", @class = "form-control" })
+    </div>
+    <div>
+        <button class="btn btn-default submit" type="submit">Submit</button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="separator">
+        <p class="change_link">
+            Already a member ?
+            <a href="#signin" class="to_register"> Log in </a>
+        </p>
+        <div class="clearfix"></div>
+        <br />
+        <div>
+            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
+            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+        </div>
+    </div>        	
+}
