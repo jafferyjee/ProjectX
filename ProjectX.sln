@@ -1,0 +1,113 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frameworks", "Frameworks", "{BB288C6B-07CA-4966-9592-363429C0D5AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Pattern", "Frameworks\Repository.Pattern\Repository.Pattern.csproj", "{6E682A14-C872-4813-B620-76E108DEA683}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Pattern.Ef6", "Frameworks\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj", "{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service.Pattern", "Frameworks\Service.Pattern\Service.Pattern.csproj", "{86F86650-EE3C-4372-8FEC-40C2FE015022}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectX.Entities", "ProjectX.Entities\ProjectX.Entities.csproj", "{94E81D48-74B2-42EB-B389-F25C8C23F9C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectX.Repository", "ProjectX.Repository\ProjectX.Repository.csproj", "{0FB607EA-4BB3-404B-9461-2232B5423885}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectX.Service", "ProjectX.Service\ProjectX.Service.csproj", "{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectX.Web", "ProjectX.Web\ProjectX.Web.csproj", "{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://jafferyjee.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Frameworks\\Repository.Pattern\\Repository.Pattern.csproj
+		SccProjectTopLevelParentUniqueName1 = ProjectX.sln
+		SccProjectName1 = Frameworks/Repository.Pattern
+		SccLocalPath1 = Frameworks\\Repository.Pattern
+		SccProjectUniqueName2 = Frameworks\\Repository.Pattern.Ef6\\Repository.Pattern.Ef6.csproj
+		SccProjectTopLevelParentUniqueName2 = ProjectX.sln
+		SccProjectName2 = Frameworks/Repository.Pattern.Ef6
+		SccLocalPath2 = Frameworks\\Repository.Pattern.Ef6
+		SccProjectUniqueName3 = Frameworks\\Service.Pattern\\Service.Pattern.csproj
+		SccProjectTopLevelParentUniqueName3 = ProjectX.sln
+		SccProjectName3 = Frameworks/Service.Pattern
+		SccLocalPath3 = Frameworks\\Service.Pattern
+		SccProjectUniqueName4 = ProjectX.Entities\\ProjectX.Entities.csproj
+		SccProjectName4 = ProjectX.Entities
+		SccLocalPath4 = ProjectX.Entities
+		SccProjectUniqueName5 = ProjectX.Repository\\ProjectX.Repository.csproj
+		SccProjectName5 = ProjectX.Repository
+		SccLocalPath5 = ProjectX.Repository
+		SccProjectUniqueName6 = ProjectX.Service\\ProjectX.Service.csproj
+		SccProjectName6 = ProjectX.Service
+		SccLocalPath6 = ProjectX.Service
+		SccProjectUniqueName7 = ProjectX.Web\\ProjectX.Web.csproj
+		SccProjectName7 = ProjectX.Web
+		SccLocalPath7 = ProjectX.Web
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E682A14-C872-4813-B620-76E108DEA683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E682A14-C872-4813-B620-76E108DEA683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E682A14-C872-4813-B620-76E108DEA683}.Debug|x86.ActiveCfg = Debug|x86
+		{6E682A14-C872-4813-B620-76E108DEA683}.Debug|x86.Build.0 = Debug|x86
+		{6E682A14-C872-4813-B620-76E108DEA683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E682A14-C872-4813-B620-76E108DEA683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E682A14-C872-4813-B620-76E108DEA683}.Release|x86.ActiveCfg = Release|x86
+		{6E682A14-C872-4813-B620-76E108DEA683}.Release|x86.Build.0 = Release|x86
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C}.Release|x86.ActiveCfg = Release|Any CPU
+		{86F86650-EE3C-4372-8FEC-40C2FE015022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86F86650-EE3C-4372-8FEC-40C2FE015022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86F86650-EE3C-4372-8FEC-40C2FE015022}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86F86650-EE3C-4372-8FEC-40C2FE015022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86F86650-EE3C-4372-8FEC-40C2FE015022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86F86650-EE3C-4372-8FEC-40C2FE015022}.Release|x86.ActiveCfg = Release|Any CPU
+		{94E81D48-74B2-42EB-B389-F25C8C23F9C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E81D48-74B2-42EB-B389-F25C8C23F9C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E81D48-74B2-42EB-B389-F25C8C23F9C4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{94E81D48-74B2-42EB-B389-F25C8C23F9C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E81D48-74B2-42EB-B389-F25C8C23F9C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E81D48-74B2-42EB-B389-F25C8C23F9C4}.Release|x86.ActiveCfg = Release|Any CPU
+		{0FB607EA-4BB3-404B-9461-2232B5423885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB607EA-4BB3-404B-9461-2232B5423885}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB607EA-4BB3-404B-9461-2232B5423885}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0FB607EA-4BB3-404B-9461-2232B5423885}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB607EA-4BB3-404B-9461-2232B5423885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB607EA-4BB3-404B-9461-2232B5423885}.Release|x86.ActiveCfg = Release|Any CPU
+		{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{678DB4A2-A20D-4F71-8A98-D8BBE879DEDD}.Release|x86.ActiveCfg = Release|Any CPU
+		{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EE17C64-F300-4C6F-A49D-BC5C5CDF8710}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6E682A14-C872-4813-B620-76E108DEA683} = {BB288C6B-07CA-4966-9592-363429C0D5AD}
+		{F68A1D19-93FB-47C1-A22B-42BEA3E4FD8C} = {BB288C6B-07CA-4966-9592-363429C0D5AD}
+		{86F86650-EE3C-4372-8FEC-40C2FE015022} = {BB288C6B-07CA-4966-9592-363429C0D5AD}
+	EndGlobalSection
+EndGlobal
