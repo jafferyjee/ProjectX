@@ -12,9 +12,9 @@ namespace ProjectX.Web
 
             Mapper.CreateMap<SubInventory, SubInvModel>();
             Mapper.CreateMap<SubInvModel, SubInventory>();
+
             Mapper.CreateMap<Item, ItemModel>();
             Mapper.CreateMap<ItemModel, Item>();
-
        }
     }
 }
