@@ -1,0 +1,137 @@
+﻿@using Kendo.Mvc.UI
+@using ProjectX.Web.Areas.Definitions.Models
+@using ProjectX.Web.Utility
+@model ItemModel
+
+@{
+    if (string.IsNullOrEmpty(Model.ItemFullCode)){
+        ViewBag.Title = "Add - Article";
+    }
+    else { 
+        ViewBag.Title = "Edit - Article";
+    }
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        @using (Html.XPageComponent((string)ViewBag.Title))
+        {
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @using (Html.XPanelComponent("Basic"))
+                    {
+                        <div class="x_content">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <img class="thumbnail" src="http://www.placehold.it/120x120/EFEFEF/AAAAAA" alt="">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <form class="form-horizontal form-label-left">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub Inventory <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @(Html.Kendo().DropDownList()
+                                                      .Name("subinventory")
+                                                      .HtmlAttributes(new { @class = "form-control" })
+                                                      .OptionLabel("-- Select --")
+                                                      .DataTextField("SubInvName")
+                                                      .DataValueField("SubInvCode")
+                                                      .DataSource(source => source
+                                                                  .Custom()
+                                                                  .Type("odata")
+                                                                  .Transport(transport => transport
+                                                                        .Read(read => read.Url("/odata/SubInventory?$select=SubInvCode,SubInvName").DataType("json"))
+                                                                  )
+                                                                  .Schema(schema => schema
+                                                                        .Data("value")
+                                                                        .Total("count")
+                                                                  )
+                                                      )
+                                                        )
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Main Category <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @(Html.Kendo().DropDownList()
+                                                      .Name("mainCategory")
+                                                      .HtmlAttributes(new { @class = "form-control" })
+                                                      .OptionLabel("-- Select --")
+                                                      .DataTextField("MainCategoryName")
+                                                      .DataValueField("MainCategoryCode")
+                                                      .DataSource(source => source
+                                                                  .Custom()
+                                                                  .Type("odata")
+                                                                  .Transport(transport => transport
+                                                                            .Read(read => read.Url("/odata/ItemMainCategory?$select=SubInvCode,MainCategoryCode,MainCategoryName").DataType("json"))
+                                                                  )
+                                                                  .Schema(schema => schema
+                                                                        .Data("value")
+                                                                        .Total("count")
+                                                                  )
+                                                                  .ServerFiltering(true)
+                                                      )
+                                                      .Enable(false)
+                                                      .AutoBind(false)
+                                                      .CascadeFrom("subinventory")
+                                                      .CascadeFromField("SubInvCode")
+                                                        )
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub Category <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @(Html.Kendo().DropDownList()
+                                                      .Name("subCategory")
+                                                      .HtmlAttributes(new { @class = "form-control" })
+                                                      .OptionLabel("-- Select --")
+                                                      .DataTextField("SubCategoryName")
+                                                      .DataValueField("SubCategoryCode")
+                                                      .DataSource(source => source
+                                                                  .Custom()
+                                                                  .Type("odata")
+                                                                  .Transport(transport => transport
+                                                                  .Read(read => read.Url("/odata/ItemSubCategory?$select=SubCategoryCode,SubCategoryName").DataType("json"))
+                                                                  )
+                                                                  .Schema(schema => schema
+                                                                        .Data("value")
+                                                                        .Total("count")
+                                                                  )
+                                                                  .ServerFiltering(true)
+                                                      )
+                                                    .Enable(false)
+                                                    .AutoBind(false)
+                                                    .CascadeFrom("mainCategory")
+                                                    .CascadeFromField("MainCategoryCode")
+                                                        )
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Article Code <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @Html.TextBoxFor(model => model.ItemFullCode, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Article Name <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @Html.TextBoxFor(model => model.ItemName, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-7"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- /page content -->

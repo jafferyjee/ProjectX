@@ -1,0 +1,71 @@
+﻿@using Kendo.Mvc.UI
+@using ProjectX.Web.Areas.Definitions.Models
+@using ProjectX.Web.Utility
+
+@{
+    ViewBag.Title = "Sub Inventory";
+}
+
+<div class="right_col" role="main">
+    <div class="">        
+        @using (Html.XPageComponent((string)ViewBag.Title)) {
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @using (Html.XPanelComponent("Basic")) {
+                        <div class="x_content">
+                            @(Html.Kendo().Grid<SubInvModel>()
+                                .Name("grid")
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(c => c.SubInvCode);
+                                    columns.Bound(c => c.SubInvName);
+                                    columns.Bound(c => c.ShortName);
+                                    columns.Bound(c => c.ModifiedBy);
+                                    columns.Bound(c => c.ModifiedDate).Format("{0:dd/MMM/yy}");
+                                    columns.Command(command => { command.Edit(); command.Destroy(); });
+                                })
+                                .ToolBar(toolbar => toolbar.Create())
+                                .Editable(editable => editable.Mode(GridEditMode.InLine))
+                                .Scrollable()
+                                .Groupable()
+                                .Sortable()
+                                .Filterable()
+                                .Pageable(pageable => pageable
+                                    .Refresh(true)
+                                    .PageSizes(true)
+                                    .ButtonCount(5))
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .Events(events => events.Error("error_handler"))
+                                    .Model(model => model.Id(c => c.SubInvCode))
+                                    .Create(update => update.Action("SubInv_Create", "SubInv"))
+                                    .Read(read => read.Action("SubInv_Read", "SubInv"))
+                                    .Update(update => update.Action("SubInv_Update", "SubInv"))
+                                    .Destroy(update => update.Action("SubInv_Destroy", "SubInv"))
+                                    .PageSize(20)
+                                )
+                                .HtmlAttributes(new { style = "height:450px;" })
+                            )
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    function error_handler(e) {
+        if (e.errors) {
+            var message = "Errors:\n";
+            $.each(e.errors, function (key, value) {
+                if ('errors' in value) {
+                    $.each(value.errors, function () {
+                        message += this + "\n";
+                    });
+                }
+            });
+            alert(message);
+        }
+    }
+</script>

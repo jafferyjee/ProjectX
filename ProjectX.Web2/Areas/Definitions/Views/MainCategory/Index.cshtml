@@ -1,0 +1,20 @@
+﻿@using Kendo.Mvc.UI
+@using ProjectX.Web.Areas.Definitions.Models
+@using ProjectX.Web.Utility
+
+@{
+    ViewBag.Title = "Main Category";
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    @using (Html.XPageComponent((string)ViewBag.Title)) { 
+        using (Html.XPanelComponent("Definition"))
+        {
+            <div class="x_content">
+                Hello World!
+            </div>
+        }
+    }
+</div>
+

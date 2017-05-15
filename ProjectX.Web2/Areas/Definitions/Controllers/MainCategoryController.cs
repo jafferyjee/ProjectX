@@ -4,17 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ProjectX.Web.Controllers
+namespace ProjectX.Web.Areas.Definitions.Controllers
 {
-    public class HomeController : BaseController
+    public class MainCategoryController : Controller
     {
-        //
-        // GET: /Home/
-
+        // GET: Definitions/MainCategory
         public ActionResult Index()
         {
             return View();
         }
-
     }
 }

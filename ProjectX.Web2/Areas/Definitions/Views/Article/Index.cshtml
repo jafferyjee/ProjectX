@@ -1,0 +1,109 @@
+﻿@using Kendo.Mvc.UI
+@using ProjectX.Web.Areas.Definitions.Models
+@using ProjectX.Web.Utility
+@using ProjectX.Entities.Models
+
+@{
+    ViewBag.Title = "Article";
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        @using (Html.XPageComponent((string)ViewBag.Title)) {                 
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @using (Html.XPanelComponent("Basic")) { 
+                    <div class="x_content">
+                        @(Html.Kendo().Grid<Item>()
+                            .Name("grid")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(e => e.ItemFullCode);
+                                columns.Bound(e => e.ItemCode);
+                                columns.Bound(e => e.ItemName);
+                                columns.Bound(e => e.ItemShortCode);
+                                columns.Bound(e => e.SubInventory.SubInvName);
+                                columns.Bound(e => e.ItemMainCategory.MainCategoryName);
+                                columns.Bound(e => e.ItemSubCategory.SubCategoryName);
+                                columns.Bound(e => e.ArrivalDate).Format("{0:MM/dd/yyyy}");
+                                columns.Bound(e => e.ModifiedBy);
+                                columns.Bound(e => e.ModifiedDate).Format("{0:MM/dd/yyyy}");
+                                columns.Command(command => 
+                                {
+                                    command.Custom("Edit").Click("editCommand");
+                                    command.Destroy();
+                                });
+                            })
+                            .DataSource(dataSource => dataSource
+                                .Custom()
+                                .Type("odata")
+                                .Transport(transport =>
+                                    {
+                                        transport.Read(read => read.Url("/odata/Item?$expand=SubInventory,ItemMainCategory,ItemSubCategory").DataType("json"));
+                                        transport.Destroy(destroy => destroy.Url("/odata/Item/").DataType("json"));
+                                    }
+                                )
+                                .Schema(schema => schema
+                                    .Data("value")
+                                    .Total("count")
+                                    .Model(model => model.Id(e => e.ItemFullCode))
+                                )
+                                .Events(events => events.Error("error_handler"))
+                                .PageSize(20)
+                                .ServerPaging(true)
+                                .ServerSorting(true)
+                                .ServerFiltering(true)
+                            )
+                            .Pageable()
+                            .Sortable()
+                            .Filterable()
+                            .Groupable()
+                            .Selectable(selectable => selectable.Mode(GridSelectionMode.Single))
+                            .HtmlAttributes(new { style = "height:100%;" })
+                            .ToolBar(toolbar =>
+                            {
+                                toolbar.Template("<a class='k-button k-button-icontext k-grid-add' onclick='addCommand()' href='#'><span class='k-icon k-add'></span>Add new record</a><a class='k-button k-button-icontext k-grid-excel' href='#'><span class='k-icon k-i-excel'></span>Export to Excel</a><a class='k-button k-button-icontext k-grid-pdf' href='#'><span class='k-icon k-i-pdf'></span>Export to PDF</a>");
+                            })
+                            .Events(events => events.DataBound("onDataBound"))
+                        )
+                    </div>
+                }
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<!-- /page content -->
+<script>
+
+    function error_handler(e) {
+        var errors = $.parseJSON(e.xhr.responseText);
+        console.log("error --> " + errors);
+        if (errors) {
+            alert("Errors:\n" + errors.join("\n"));
+        }
+    }
+
+    //function getSelectedRow(grid) {
+    //    var grid = $("#grid").data('kendoGrid');
+    //    return grid.dataItem(grid.select()).ItemFullCode;
+    //}
+
+    var url = '@Url.Action("CreateUpdate", "Article", new { area = "Definitions" })';
+
+    function addCommand() {
+        e.preventDefault();
+        window.location.href = url;
+    }
+
+    function editCommand(e) {
+        e.preventDefault();
+        window.location.href = url + "/" + this.dataItem($(e.currentTarget).closest("tr")).ItemFullCode;
+    }
+
+    function onDataBound(e) {
+        $(".k-grid-Edit").find("span").addClass("k-icon k-edit");
+    }
+
+</script>

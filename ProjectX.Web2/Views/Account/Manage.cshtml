@@ -1,0 +1,29 @@
+﻿@model ProjectX.Web.Models.LocalPasswordModel
+
+@{
+    ViewBag.Title = "Manage Account";
+}
+
+<div class="row-fluid">
+	<div class="span12">
+        <h3 class="heading">@ViewBag.Title</h3>
+        
+        <p class="message-success">@ViewBag.StatusMessage</p>
+
+        <div class="alert alert-info">
+            You're logged in as <strong>@User.Identity.Name</strong>.
+        </div>
+
+        <section>
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        { 
+            @Html.Partial("_SetPasswordPartial")
+        }
+        </section>
+    </div>
+</div>   
+
