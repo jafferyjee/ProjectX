@@ -246,6 +246,10 @@
     </Content>
     <Content Include="App_Data\Tmp\Uploads\41989f593c4445668c6e49e697ced979.JPG" />
     <Content Include="App_Data\Tmp\Uploads\4cf289fd0e0d42a8b7a6d6044d371d92.JPG" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\kendo\2015.1.429\Black\editor.png" />
     <Content Include="Content\kendo\2015.1.429\Black\imagebrowser.png" />
     <Content Include="Content\kendo\2015.1.429\Black\indeterminate.gif" />
@@ -702,10 +706,31 @@
     <Content Include="Content\vendors\nprogress\nprogress.js" />
     <Content Include="Content\vendors\nprogress\support\extras.css" />
     <Content Include="Content\vendors\nprogress\support\style.css" />
+    <Content Include="Content\vendors\pnotify\.gitignore" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.animate.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.brighttheme.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.buttons.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.buttons.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.callbacks.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.confirm.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.desktop.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.history.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.history.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.material.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.mobile.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.mobile.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.nonblock.css" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.nonblock.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.reference.js" />
+    <Content Include="Content\vendors\pnotify\dist\pnotify.tooltip.js" />
+    <Content Include="Content\vendors\pnotify\libtests\browserify\index.js" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Areas\Definitions\Views\web.config" />
     <Content Include="Areas\Definitions\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Definitions\Views\Article\Index.cshtml" />
+    <Content Include="Areas\Definitions\Views\Item\Index.cshtml" />
     <Content Include="Areas\Definitions\Views\SubInv\Index.cshtml" />
     <Content Include="Content\kendo\2015.1.429\fonts\DejaVu\DejaVuSans-Bold.ttf" />
     <Content Include="Content\kendo\2015.1.429\fonts\DejaVu\DejaVuSans-BoldOblique.ttf" />
@@ -887,13 +912,31 @@
     <Content Include="Images\img.jpg" />
     <Content Include="Images\loading.gif" />
     <Content Include="Scripts\ajaxlogin.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\custom.js" />
     <Content Include="Scripts\custom.min.js" />
     <Content Include="AppSettings.config" />
     <Content Include="ConnectionStrings.config" />
     <Content Include="Areas\Definitions\Views\MainCategory\Index.cshtml" />
-    <Content Include="Areas\Definitions\Views\Article\CreateUpdate.cshtml" />
-    <Content Include="Areas\Definitions\Views\Article\Delete.cshtml" />
+    <Content Include="Areas\Definitions\Views\Item\CreateUpdate.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\vendors\pnotify\.bower.json" />
+    <Content Include="Content\vendors\pnotify\bower.json" />
+    <Content Include="Content\vendors\pnotify\COPYING" />
+    <Content Include="Content\vendors\pnotify\README.md" />
+    <Content Include="Areas\Definitions\Views\Shared\EditorTemplates\SubInventoryLookup.cshtml" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\kendo\kendo.all-vsdoc.js" />
     <None Include="Scripts\kendo\kendo.all.min.intellisense.js" />
     <Content Include="Scripts\kendo\kendo.all.min.js" />
@@ -919,16 +962,20 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Areas\Definitions\Controllers\ArticleController.cs" />
+    <Compile Include="Areas\Definitions\Controllers\ItemController.cs" />
     <Compile Include="Areas\Definitions\Controllers\MainCategoryController.cs" />
     <Compile Include="Areas\Definitions\Controllers\SubInvController.cs" />
     <Compile Include="Areas\Definitions\DefinitionsAreaRegistration.cs" />
     <Compile Include="Areas\Definitions\Models\ItemModel.cs" />
-    <Compile Include="Areas\Definitions\Models\SubInvModel.cs" />
+    <Compile Include="Areas\Definitions\Models\MainCategoryModel.cs" />
+    <Compile Include="Areas\Definitions\Models\SubCategoryModel.cs" />
+    <Compile Include="Areas\Definitions\Models\SubInventoryModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Filters\UnHandledExceptionFilterAttribute.cs" />
     <Compile Include="Filters\ValidateHttpAntiForgeryTokenAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -936,6 +983,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\HtmlHelperExtensions.cs" />
+    <Compile Include="Utility\Lookups.cs" />
     <Compile Include="Utility\Mappings.cs" />
     <Compile Include="Utility\Util.cs" />
   </ItemGroup>
@@ -967,7 +1015,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Definitions\Views\Shared\" />
+    <Folder Include="Views\Upload\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Frameworks\Repository.Pattern.Ef6\Repository.Pattern.Ef6.csproj">
@@ -981,6 +1029,10 @@
     <ProjectReference Include="..\Frameworks\Service.Pattern\Service.Pattern.csproj">
       <Project>{86f86650-ee3c-4372-8fec-40c2fe015022}</Project>
       <Name>Service.Pattern</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectX.Core\ProjectX.Core.csproj">
+      <Project>{4e264dd4-32cb-4ccb-b085-979a3dc98be9}</Project>
+      <Name>ProjectX.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\ProjectX.Entities\ProjectX.Entities.csproj">
       <Project>{94e81d48-74b2-42eb-b389-f25c8c23f9c4}</Project>
