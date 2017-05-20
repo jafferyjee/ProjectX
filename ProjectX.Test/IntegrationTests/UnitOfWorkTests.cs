@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Northwind.Entities.Models;
-using Northwind.Service;
+using ProjectX.Entities.Models;
+using ProjectX.Service;
 using Repository.Pattern.DataContext;
 using Repository.Pattern.Ef6;
 using Repository.Pattern.Ef6.Factories;
@@ -11,7 +11,7 @@ using Repository.Pattern.Repositories;
 using Repository.Pattern.UnitOfWork;
 using Service.Pattern;
 
-namespace Northwind.Test.IntegrationTests
+namespace ProjectX.Test.IntegrationTests
 {
     [TestClass]
     public class UnitOfWorkTests
@@ -21,7 +21,7 @@ namespace Northwind.Test.IntegrationTests
         {
             IRepositoryProvider repositoryProvider = new RepositoryProvider(new RepositoryFactories());
 
-            using(IDataContextAsync context = new NorthwindContext())
+            using(IDataContextAsync context = new ProjectXContext())
             using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, repositoryProvider))
             {
                 //IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -62,7 +62,7 @@ namespace Northwind.Test.IntegrationTests
         public void UnitOfWork_Dispose_Test()
         {
             IRepositoryProvider repositoryProvider = new RepositoryProvider(new RepositoryFactories());
-            IDataContextAsync context = new NorthwindContext();
+            IDataContextAsync context = new ProjectXContext();
             IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, repositoryProvider);
 
             // opening connection
@@ -87,7 +87,7 @@ namespace Northwind.Test.IntegrationTests
         public void IDataContext_Dispose_Test()
         {
             IRepositoryProvider repositoryProvider = new RepositoryProvider(new RepositoryFactories());
-            IDataContextAsync context = new NorthwindContext();
+            IDataContextAsync context = new ProjectXContext();
             IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, repositoryProvider);
 
             // opening connection

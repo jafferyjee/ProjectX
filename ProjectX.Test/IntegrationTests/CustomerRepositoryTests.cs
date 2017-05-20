@@ -8,10 +8,10 @@ using System.Linq;
 using Microsoft.SqlServer.Management.Common;
 using Microsoft.SqlServer.Management.Smo;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Northwind.Entities.Models;
-using Northwind.Repository.Models;
-using Northwind.Repository.Repositories;
-using Northwind.Service;
+using ProjectX.Entities.Models;
+using ProjectX.Repository.Models;
+using ProjectX.Repository.Repositories;
+using ProjectX.Service;
 using Repository.Pattern.DataContext;
 using Repository.Pattern.Ef6;
 using Repository.Pattern.Ef6.Factories;
@@ -22,7 +22,7 @@ using Service.Pattern;
 
 #endregion
 
-namespace Northwind.Test.IntegrationTests
+namespace ProjectX.Test.IntegrationTests
 {
     [TestClass]
     public class CustomerRepositoryTests
@@ -45,22 +45,22 @@ namespace Northwind.Test.IntegrationTests
         //[TestInitialize]
         //public void Initialize()
         //{
-        //    TestContext.WriteLine("Please ensure Northwind.Test/Sql/instnwnd.sql is copied to C:\\temp\\instnwnd.sql for test to run succesfully");
-        //    TestContext.WriteLine("Please verify the the Northwind.Test/app.config connection strings are correct for your environment");
-        //    TestContext.WriteLine("TestFixture executing, creating NorthwindTest Db for integration  tests");
-        //    TestContext.WriteLine("Loading and parsing create NorthwindTest database Sql script");
+        //    TestContext.WriteLine("Please ensure ProjectX.Test/Sql/instnwnd.sql is copied to C:\\temp\\instnwnd.sql for test to run succesfully");
+        //    TestContext.WriteLine("Please verify the the ProjectX.Test/app.config connection strings are correct for your environment");
+        //    TestContext.WriteLine("TestFixture executing, creating ProjectXTest Db for integration  tests");
+        //    TestContext.WriteLine("Loading and parsing create ProjectXTest database Sql script");
         //}
 
         //[TestCleanup]
         //public void Cleanup()
         //{
-        //    // There is a state issue where NorthwindTest exists in the master database, however the actual NorthwindTest Db does not exists
+        //    // There is a state issue where ProjectXTest exists in the master database, however the actual ProjectXTest Db does not exists
         //    // We can just leave the TestInitialize method which will drop the Db before recreating it for until we figure this out.
 
         //    //  kill any live transactions
-        //    //const string script1 = "ALTER DATABASE NorthwindTest SET READ_ONLY WITH ROLLBACK IMMEDIATE";
+        //    //const string script1 = "ALTER DATABASE ProjectXTest SET READ_ONLY WITH ROLLBACK IMMEDIATE";
         //    //  drop the db and deletes the files on disk
-        //    //const string script2 = "DROP DATABASE NorthwindTest;";
+        //    //const string script2 = "DROP DATABASE ProjectXTest;";
         //    //RunSqlOnMaster(script1);
         //    //RunSqlOnMaster(script2);
         //}
@@ -78,7 +78,7 @@ namespace Northwind.Test.IntegrationTests
         //public void CreateCustomerTest()
         //{
         //    // Create new customer
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -103,7 +103,7 @@ namespace Northwind.Test.IntegrationTests
         //    }
 
         //    //  Query for newly created customer by ID from a new context, to ensure it's not pulling from cache
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -116,7 +116,7 @@ namespace Northwind.Test.IntegrationTests
         //public void CreateAndUpdateAndDeleteCustomerGraphTest()
         //{
         //    // Create new customer
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -160,7 +160,7 @@ namespace Northwind.Test.IntegrationTests
         //    Customer customerForUpdateDeleteGraphTest = null;
 
         //    //  Query for newly created customer by ID from a new context, to ensure it's not pulling from cache
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -196,7 +196,7 @@ namespace Northwind.Test.IntegrationTests
         //    }
 
         //    //  Query for newly created customer by ID from a new context, to ensure it's not pulling from cache
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -228,7 +228,7 @@ namespace Northwind.Test.IntegrationTests
         //[TestMethod]
         //public void GetCustomerOrderTest()
         //{
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -242,7 +242,7 @@ namespace Northwind.Test.IntegrationTests
         //[TestMethod]
         //public void FindCustomerById_Test()
         //{
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
@@ -256,7 +256,7 @@ namespace Northwind.Test.IntegrationTests
         //[TestMethod]
         //public void CustomerOrderTotalByYear()
         //{
-        //    using (IDataContextAsync context = new NorthwindContext())
+        //    using (IDataContextAsync context = new ProjectXContext())
         //    using (IUnitOfWorkAsync unitOfWork = new UnitOfWork(context, _repositoryProvider))
         //    {
         //        IRepositoryAsync<Customer> customerRepository = new Repository<Customer>(context, unitOfWork);
