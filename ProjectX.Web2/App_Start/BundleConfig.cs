@@ -15,7 +15,10 @@ namespace ProjectX.Web
                         "~/Content/vendors/jquery/dist/jquery.js",
                         "~/Content/vendors/bootstrap/dist/js/bootstrap.js",
                         "~/Content/vendors/fastclick/lib/fastclick.js",
-                        "~/Content/vendors/nprogress/nprogress.js"));
+                        "~/Content/vendors/nprogress/nprogress.js",
+                        "~/Content/vendors/pnotify/dist/pnotify.js",
+                        "~/Content/vendors/pnotify/dist/pnotify.buttons.js",
+                        "~/Content/vendors/pnotify/dist/pnotify.nonblock.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/theme").Include(
                         "~/Scripts/custom.js"));
@@ -25,7 +28,10 @@ namespace ProjectX.Web
             bundles.Add(new StyleBundle("~/Content/vendors/css/styles")
                         .Include("~/Content/vendors/bootstrap/dist/css/bootstrap.css", new CssRewriteUrlTransform())
                         .Include("~/Content/vendors/nprogress/nprogress.css", 
-                                 "~/Content/vendors/animate.css/animate.min.css")
+                                 "~/Content/vendors/animate.css/animate.min.css",
+                                 "~/Content/vendors/pnotify/dist/pnotify.css",
+                                 "~/Content/vendors/pnotify/dist/pnotify.buttons.css",
+                                 "~/Content/vendors/pnotify/dist/pnotify.nonblock.css")
                         .Include("~/Content/vendors/font-awesome/css/font-awesome.css", new CssRewriteUrlTransform()));
 
             bundles.Add(new StyleBundle("~/Content/themes/css").Include("~/Content/themes/custom.css"));
