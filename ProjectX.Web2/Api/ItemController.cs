@@ -1,5 +1,6 @@
 ﻿using ProjectX.Entities.Models;
 using ProjectX.Service;
+using ProjectX.Web.Areas.Definitions.Models;
 using ProjectX.Web.Utility;
 using Repository.Pattern.Infrastructure;
 using Repository.Pattern.UnitOfWork;
@@ -64,7 +65,7 @@ namespace ProjectX.Web.Api
         }
         
         // PUT: odata/item(5)
-        public async Task<IHttpActionResult> Put(string key, Item item)
+        public async Task<IHttpActionResult> Put([FromODataUri] string key, [FromBody] Item item)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -91,12 +92,15 @@ namespace ProjectX.Web.Api
         }
 
         // POST: odata/item
-        public async Task<IHttpActionResult> Post(Item item)
+        [HttpPost]
+        public async Task<IHttpActionResult> Post([FromBody] ItemModel model)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            PopulateFields(item);
+            Item item = Mappings.ToEntity(model);
+
+            UpdateLogFields(item);
 
             item.ObjectState = ObjectState.Added;
             _itemService.Insert(item);
@@ -117,7 +121,7 @@ namespace ProjectX.Web.Api
         }        
 
         // DELETE: odata/item(5)
-        public async Task<IHttpActionResult> Delete(string key)
+        public async Task<IHttpActionResult> Delete([FromODataUri] string key)
         {
             Item item = await _itemService.FindAsync(key);
 
@@ -168,15 +172,18 @@ namespace ProjectX.Web.Api
             return _itemService.Query(i => i.ItemFullCode == key).Select().Any();
         }
 
-        private void PopulateFields(Item item)
+        private void UpdateLogFields(Item item)
         {
-            string lastSegment = item.SubCategoryCode.Substring(item.SubCategoryCode.LastIndexOf("-") + 1);
-            string itemFullCode = item.SubCategoryCode.Substring(0, item.SubCategoryCode.LastIndexOf("-") + 1) + item.ItemShortCode.PadLeft(lastSegment.Length, '0');
-            item.ItemFullCode = itemFullCode;
-            item.CreatedBy = Util.CurrentUser;
-            item.CreatedDate = System.DateTime.Now;
-            item.ModifiedBy = Util.CurrentUser;
-            item.ModifiedDate = System.DateTime.Now;
+            if (string.IsNullOrEmpty(item.CreatedBy) || !item.CreatedDate.HasValue)
+            {
+                item.CreatedBy = item.ModifiedBy = Util.CurrentUser;
+                item.CreatedDate = item.ModifiedDate = System.DateTime.Now;
+            }
+            else
+            {
+                item.ModifiedBy = Util.CurrentUser;
+                item.ModifiedDate = System.DateTime.Now;
+            }
         }
 
         protected override void Dispose(bool disposing)

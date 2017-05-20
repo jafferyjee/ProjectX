@@ -40,7 +40,6 @@ namespace ProjectX.Web.Api
             }
         }
 
-
         private MultipartFormDataStreamProvider GetMultipartStreamProvider() 
         {
             var uploadFolder = Util.UploadPath;
