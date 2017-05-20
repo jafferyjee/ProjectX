@@ -1,0 +1,303 @@
+﻿@using Kendo.Mvc.UI
+@using ProjectX.Web.Areas.Definitions.Models
+@using ProjectX.Web.Utility
+@model ItemModel
+
+@{
+    ViewBag.Title = (Model.isEditMode ? "Edit" : "Add") + " - Article";
+}
+
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        @using (Html.XPageComponent((string)ViewBag.Title))
+        {
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    @using (Html.XPanelComponent("Basic"))
+                    {
+                        <form class="form-horizontal form-label-left">
+                            <div class="x_content">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img class="thumbnail" src="http://www.placehold.it/120x120/EFEFEF/AAAAAA" alt="" width="190" height="190">
+                                        @*<a class="btn btn-app xupload">
+                                            <i class="fa fa-upload"></i> Upload
+                                        </a>
+                                        <a class="btn btn-app xremove">
+                                            <i class="fa fa-remove"></i> Delete
+                                        </a>*@                                        
+                                        @(Html.Kendo().Upload()
+                                            .Name("files")
+                                            .Async(a => a
+                                                .Save("Save", "Upload", new { area = "" })
+                                                .Remove("Remove", "Upload", new { area = "" })
+                                                .AutoUpload(true)
+                                            )
+                                            .Events(e =>
+                                            {
+                                                e.Upload("onFileUpload");
+                                                e.Success("onFileUploadSuccess");
+                                            })
+                                            .ShowFileList(true)
+                                            .Messages(m => m.Select("Upload Picture"))
+                                        )
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-7">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub Inventory <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @(Html.Kendo().DropDownList()
+                                                            .Name("SubInvCode")
+                                                            .HtmlAttributes(new { @class = "form-control", required = "required", validationmessage = "Enter {0}" })
+                                                            .OptionLabel("-- Select --")
+                                                            .DataTextField("SubInvName")
+                                                            .DataValueField("SubInvCode")
+                                                            .DataSource(source => source
+                                                                        .Custom()
+                                                                        .Type("odata")
+                                                                        .Transport(transport => transport
+                                                                            .Read(read => read.Url("/odata/SubInventory?$select=SubInvCode,SubInvName").DataType("json"))
+                                                                        )
+                                                                        .Schema(schema => schema
+                                                                            .Data("value")
+                                                                            .Total("count")
+                                                                        )
+                                                            )
+                                                        )
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Main Category <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @(Html.Kendo().DropDownList()
+                                                                .Name("MainCategoryCode")
+                                                                .HtmlAttributes(new { @class = "form-control", required = "required", validationmessage = "Enter {0}" })
+                                                                .OptionLabel("-- Select --")
+                                                                .DataTextField("MainCategoryName")
+                                                                .DataValueField("MainCategoryCode")
+                                                                .DataSource(source => source
+                                                                            .Custom()
+                                                                            .Type("odata")
+                                                                            .Transport(transport => transport
+                                                                                    .Read(read => read.Url("/odata/ItemMainCategory?$select=SubInvCode,MainCategoryCode,MainCategoryName").DataType("json"))
+                                                                            )
+                                                                            .Schema(schema => schema
+                                                                                .Data("value")
+                                                                                .Total("count")
+                                                                            )
+                                                                            .ServerFiltering(true)
+                                                                )
+                                                                .Enable(false)
+                                                                .AutoBind(false)
+                                                                .CascadeFrom("SubInvCode")
+                                                                .CascadeFromField("SubInvCode")
+                                                        )
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Sub Category <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @(Html.Kendo().DropDownList()
+                                                                .Name("SubCategoryCode")
+                                                                .HtmlAttributes(new { @class = "form-control", required = "required", validationmessage = "Enter {0}" })
+                                                                .OptionLabel("-- Select --")
+                                                                .DataTextField("SubCategoryName")
+                                                                .DataValueField("SubCategoryCode")
+                                                                .DataSource(source => source
+                                                                            .Custom()
+                                                                            .Type("odata")
+                                                                            .Transport(transport => transport
+                                                                            .Read(read => read.Url("/odata/ItemSubCategory?$select=SubCategoryCode,SubCategoryName").DataType("json"))
+                                                                            )
+                                                                            .Schema(schema => schema
+                                                                                .Data("value")
+                                                                                .Total("count")
+                                                                            )
+                                                                            .ServerFiltering(true)
+                                                                )
+                                                            .Enable(false)
+                                                            .AutoBind(false)
+                                                            .CascadeFrom("MainCategoryCode")
+                                                            .CascadeFromField("MainCategoryCode")
+                                                        )
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Article Code <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @Html.TextBoxFor(model => model.ItemFullCode, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Article Name <span class="required">*</span></label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        @Html.TextBoxFor(model => model.ItemName, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <button type="submit" class="btn btn-success pull-right">Submit</button>
+                                                <button class="btn btn-primary pull-right" type="button">Cancel</button>
+                                                <div id="message"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                                            <li role="presentation" class="active">
+                                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Home</a>
+                                            </li>
+                                            <li role="presentation" class="">
+                                                <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Profile</a>
+                                            </li>
+                                            <li role="presentation" class="">
+                                                <a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
+                                            </li>
+                                        </ul>
+                                        <div id="myTabContent" class="tab-content">
+                                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                                <p>
+                                                    Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher
+                                                    synth. Cosby sweater eu banh mi, qui irure terr.
+                                                </p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                                <p>
+                                                    Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                                                    booth letterpress, commodo enim craft beer mlkshk aliquip
+                                                </p>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                                <p>
+                                                    xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
+                                                    booth letterpress, commodo enim craft beer mlkshk
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- /page content -->
+<script>
+
+    $(function () {
+        var validator = $("form").kendoValidator().data("kendoValidator");
+
+        $("form").submit(function (e) {
+            e.preventDefault();
+
+            if (!validator.validate()) return;
+
+            @if (Model.isEditMode)
+            {
+                <text>update()</text>
+            }
+            else
+            {
+                <text>create()</text>
+            }
+        });
+    });
+
+    function create() {
+        submit("/odata/Item", "POST");
+    }
+
+    function update() {
+        submit("/odata/Item('" + $('#ItemFullCode').val() + "')", "PUT");
+    }
+
+    function submit(url, method) {
+        $.ajax({
+            url: url,
+            method: method,
+            data: $('form').serialize(),
+            success: onSuccess,
+            error: onError
+        })
+    }
+
+    function onSuccess(result){
+        new PNotify({
+            title: 'Regular Success',
+            text: 'That thing that you were trying to do worked!',
+            type: 'success',
+            styling: 'bootstrap3'
+        });
+    }
+
+    function onError(err){
+        new PNotify({
+            title: 'Oh No!',
+            text: formatErr(err),
+            type: 'error',
+            styling: 'bootstrap3'
+        });
+    }
+
+    function formatErr(e){
+        var txt = '';
+        if (e){
+            var err = e["responseJSON"]["odata.error"];
+            txt = err.message.value + "\n";
+
+            if (err.innererror){
+                txt = txt + err.innererror.message;
+            }
+        }
+        return txt;
+    }
+    
+    // File Upload Functions //
+
+    function onFileUpload(e)
+    {
+        $.each(e.files, function (index, value) {
+            if ((/\.(gif|jpg|jpeg|png)$/i).test(value.extension) == false){
+                alert("Only image files [gif,jpg,jpeg,png] are allowed.");
+                e.preventDefault();
+            }
+            else if (value.size > 20480) {
+                alert("File size must be less than 2KB.");
+                e.preventDefault();
+            }
+
+            if (e.files.length > 1) {
+                alert("Please select a single file.");
+                e.preventDefault();
+                return false; //break the loop
+            }
+        });    
+    }
+
+    function onFileUploadSuccess(e)
+    {
+        if (e.operation == "upload") {
+            for (var i = 0; i < e.files.length; i++) {
+                var file = e.files[i].rawFile;
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onloadend = function () {
+                        $(".thumbnail").attr('src', this.result);
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            }
+        }
+    }
+</script>
