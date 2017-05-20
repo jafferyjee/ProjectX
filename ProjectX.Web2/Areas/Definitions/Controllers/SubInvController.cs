@@ -53,7 +53,7 @@ namespace ProjectX.Web.Areas.Definitions.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult SubInv_Create([DataSourceRequest] DataSourceRequest request, SubInvModel model)
+        public ActionResult SubInv_Create([DataSourceRequest] DataSourceRequest request, SubInventoryModel model)
         {
             if (model != null && ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace ProjectX.Web.Areas.Definitions.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult SubInv_Update([DataSourceRequest] DataSourceRequest request, SubInvModel model)
+        public ActionResult SubInv_Update([DataSourceRequest] DataSourceRequest request, SubInventoryModel model)
         {
             if (model != null && ModelState.IsValid)
             {
@@ -110,7 +110,7 @@ namespace ProjectX.Web.Areas.Definitions.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult SubInv_Destroy([DataSourceRequest] DataSourceRequest request, SubInvModel model)
+        public ActionResult SubInv_Destroy([DataSourceRequest] DataSourceRequest request, SubInventoryModel model)
         {
             if (model != null)
             {

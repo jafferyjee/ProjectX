@@ -7,7 +7,7 @@ using System.Web;
 
 namespace ProjectX.Web.Areas.Definitions.Models
 {
-    public class SubInvModel
+    public class SubInventoryModel
     {
         [Display(Name="Code")]
         [Required]

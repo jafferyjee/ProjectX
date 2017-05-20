@@ -1,9 +1,10 @@
 ﻿@using Kendo.Mvc.UI
-@using ProjectX.Web.Areas.Definitions.Models
+@using ProjectX.Entities.Models
 @using ProjectX.Web.Utility
 
 @{
     ViewBag.Title = "Main Category";
+    
 }
 
 <!-- page content -->
@@ -12,9 +13,59 @@
         using (Html.XPanelComponent("Definition"))
         {
             <div class="x_content">
-                Hello World!
+                @(Html.Kendo().Grid<ItemMainCategory>()
+                    .Name("grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(c => c.MainCategoryCode);
+                        columns.Bound(c => c.MainCategoryName);
+                        columns.ForeignKey(c => c.SubInvCode, Lookups.SubInventoryLookup()).Title("Sub Inventory").EditorTemplateName("SubInventoryLookup");
+                        columns.Bound(c => c.ModifiedBy);
+                        columns.Bound(c => c.ModifiedDate).Format("{0:dd/MMM/yy}");
+                        columns.Command(command => { 
+                            command.Edit(); 
+                            command.Destroy(); 
+                        });
+                    })
+                    .ToolBar(toolbar => toolbar.Create())
+                    .Editable(editable => editable.Mode(GridEditMode.InLine))
+                    .Scrollable()
+                    .Groupable()
+                    .Sortable()
+                    .Filterable()
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(true)
+                        .ButtonCount(5))
+                    .DataSource(dataSource => dataSource
+                        .Custom()
+                        .Type("odata")
+                        .Transport(transport =>
+                            {
+                                transport.Read(read => read.Url("/odata/ItemMainCategory").DataType("json"));
+                                transport.Create(create => create.Url("/odata/ItemMainCategory").DataType("json"));
+                            }
+                        )
+                        .Schema(schema => schema
+                            .Data("value")
+                            .Total("count")
+                            .Model(model => model.Id(e => e.MainCategoryCode))
+                        )
+                        .Events(events => events.Error("error_handler"))
+                        .PageSize(20)
+                        .ServerPaging(true)
+                        .ServerSorting(true)
+                        .ServerFiltering(true)
+                    )
+                    .HtmlAttributes(new { style = "height:450px;" })
+                )
             </div>
         }
     }
 </div>
-
+<script>
+    function error_handler(err)
+    {
+        console.log(err);
+    }
+</script>

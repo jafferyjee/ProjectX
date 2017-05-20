@@ -9,17 +9,21 @@ using System.Web;
 using System.Web.Mvc;
 using ProjectX.Web.Utility;
 using ProjectX.Web.Areas.Definitions.Models;
+using System.Threading.Tasks;
+using System.Web.Http;
+using ProjectX.Entities.Models;
+using Repository.Pattern.Infrastructure;
 
 namespace ProjectX.Web.Areas.Definitions.Controllers
 {
-    public class ArticleController : Controller, IDisposable
+    public class ItemController : Controller, IDisposable
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWorkAsync _unitOfWorkAsync;
         private readonly IItemService _itemService;
 
-        public ArticleController(IUnitOfWork unitOfWork, IItemService itemService)
+        public ItemController(IUnitOfWorkAsync unitOfWork, IItemService itemService)
         {
-            _unitOfWork = unitOfWork;
+            _unitOfWorkAsync = unitOfWork;
             _itemService = itemService;
         }
 
@@ -35,20 +39,44 @@ namespace ProjectX.Web.Areas.Definitions.Controllers
                 return View(new ItemModel());
 
             ItemModel model = Mappings.ToModel(_itemService.Queryable().Where(i => i.ItemFullCode == id).FirstOrDefault());
+            model.isEditMode = true;
 
             return View(model);
         }
 
         #region Grid Methods
 
-        public ActionResult Item_Read([DataSourceRequest] DataSourceRequest request)
-        {
-            return Json(_itemService.Queryable().OrderBy(i => i.ItemFullCode).ToDataSourceResult(request));
-        }
+        //public ActionResult Item_Read([DataSourceRequest] DataSourceRequest request)
+        //{
+        //    return Json(_itemService.Queryable().OrderBy(i => i.ItemFullCode).ToDataSourceResult(request));
+        //}
 
         #endregion
 
         #region Crud Methods
+
+        //public async Task<ActionResult> Save([FromBody] ItemModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return View(model);
+
+        //    Item item = Mappings.ToEntity(model);
+        //    item.ObjectState = ObjectState.Modified;
+        //    _itemService.Update(item);
+
+        //    try
+        //    {
+        //        await _unitOfWorkAsync.SaveChangesAsync();
+        //    }
+        //    catch (Exception ex) 
+        //    {
+        //        if (!ItemExists(model.ItemFullCode))
+        //            return NotFound();
+
+        //        throw;
+        //    }
+        //}
+
         #endregion
 
         #region Private Methods
@@ -62,7 +90,7 @@ namespace ProjectX.Web.Areas.Definitions.Controllers
         {
             if (disposing)
             {
-                _unitOfWork.Dispose();
+                _unitOfWorkAsync.Dispose();
             }
             base.Dispose(disposing);
         }
