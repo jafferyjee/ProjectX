@@ -16,5 +16,10 @@ namespace ProjectX.Web.Utility
         {
             get { return ConfigurationManager.AppSettings["UploadPath"]; }
         }
+
+        public static void LogException(Exception ex) 
+        {
+            // TODO: log to db
+        }
     }
 }

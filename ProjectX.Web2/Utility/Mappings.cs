@@ -10,14 +10,14 @@ namespace ProjectX.Web.Utility
 {
     public static class Mappings
     {
-        public static SubInventory ToEntity(this SubInvModel model) 
+        public static SubInventory ToEntity(this SubInventoryModel model) 
         {
-            return Mapper.Map<SubInvModel, SubInventory>(model);
+            return Mapper.Map<SubInventoryModel, SubInventory>(model);
         }
 
-        public static SubInvModel ToModel(this SubInventory entity) 
+        public static SubInventoryModel ToModel(this SubInventory entity) 
         {
-            return Mapper.Map<SubInventory, SubInvModel>(entity);
+            return Mapper.Map<SubInventory, SubInventoryModel>(entity);
         }
 
         public static Item ToEntity(this ItemModel model) 
